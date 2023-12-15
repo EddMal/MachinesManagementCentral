@@ -10,8 +10,13 @@ namespace MachinesManagementCentral.Client.Components
         {
             base.OnInitialized();
 
-            DevisteLst.Add(new Device() { DeviceId = Guid.NewGuid(),Location = Location.Sweden, Date =DateTime.Now, DeviceType ="CoffeeMakerx4000", Status = Status.offline });
-            DevisteLst.Add(new Device() { DeviceId = Guid.NewGuid(), Location = Location.England, Date = DateTime.Now, DeviceType = "Saw", Status = Status.offline });
+            DevisteLst.Add(new Device() { DeviceId = Guid.NewGuid(),
+                                          Location = Location.Sweden, Date =DateTime.Now,
+                                          DeviceType ="CoffeeMakerx4000", Status = Status.offline });
+
+            DevisteLst.Add(new Device() { DeviceId = Guid.NewGuid(),
+                                          Location = Location.England, Date = DateTime.Now,
+                                          DeviceType = "Saw", Status = Status.offline });
 
         }
 

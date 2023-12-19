@@ -1,0 +1,33 @@
+﻿@page "/SendInstruction/{DeviceId}"
+<h3>Send Instruction</h3>
+
+<section class="device-edit">
+
+    <EditForm Model="@Datanstruction" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+
+        <table class="table">
+            <thead>
+                <tr>
+
+                    <th scope="col">Data instruction</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row">
+                        <InputText id="Instruction" @bind-Value="Datanstruction.Instruction" class="form-control col-md-8">
+                        </InputText>
+                        <ValidationMessage For="@(()=> Datanstruction.Instruction)" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="@($"listofdevices")" class="btn btn-outline-primary">Back to Device list</a>&nbsp;
+        <button type="submit" class="btn btn-primary me-1">Add Device</button>
+    </EditForm>
+</section>

@@ -1,5 +1,5 @@
-﻿<h3>DeviceList</h3>
-
+﻿
+@ExtraCaption
 <table class="table">
     <thead>
         <tr>
@@ -8,18 +8,24 @@
             <th scope="col">Date</th>
             <th scope="col">Type</th>
             <th scope="col">Status</th>
+            <th scope="col">View</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Update</th>
         </tr>
     </thead>
 
     <tbody>
-        @foreach (var device in DevisteLst)
+        @foreach (var device in DeviceLst)
         {
             <tr>
-                <td scope="col">@device.DeviceId</td>
-                <td scope="col">@device.Location</td>
-                <td scope="col">@device.Date</td>
-                <td scope="col">@device.DeviceType</td>
-                <td scope="col">@device.Status</td>
+                <td scope="row">@device.DeviceId</td>
+                <td scope="row">@device.Location</td>
+                <td scope="row">@device.Date</td>
+                <td scope="row">@device.DeviceType</td>
+                <td scope="row">@device.Status</td>
+                <td scope="row"><a href="@($"DeviceView/{device.DeviceId}")" class="btn btn-outline-primary">View</a></td>
+                <td scope="row"><a href="@($"DeviceDelete/{device.DeviceId}")" class="btn btn-outline-primary">Delete</a></td>
+                <td scope="row"><a href="@($"DeviceUpdate/{device.DeviceId}")" class="btn btn-outline-primary">Update</a></td>
             </tr>
         }
     </tbody>

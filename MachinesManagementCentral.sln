@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachinesManagementCentral.Server", "MachinesManagementCentral\Server\MachinesManagementCentral.Server.csproj", "{6346E6A8-488B-44C8-9829-F450022CEF6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MachinesManagementCentral.Server", "MachinesManagementCentral\Server\MachinesManagementCentral.Server.csproj", "{6346E6A8-488B-44C8-9829-F450022CEF6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachinesManagementCentral.Client", "MachinesManagementCentral\Client\MachinesManagementCentral.Client.csproj", "{C607F2DD-0A6A-4E44-AACC-E93C277F7EC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MachinesManagementCentral.Client", "MachinesManagementCentral\Client\MachinesManagementCentral.Client.csproj", "{C607F2DD-0A6A-4E44-AACC-E93C277F7EC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachinesManagementCentral.Shared", "MachinesManagementCentral\Shared\MachinesManagementCentral.Shared.csproj", "{9B4C6724-EBFB-4AEF-BD0A-3706064D9C75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MachinesManagementCentral.Shared", "MachinesManagementCentral\Shared\MachinesManagementCentral.Shared.csproj", "{9B4C6724-EBFB-4AEF-BD0A-3706064D9C75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceAPI", "ServiceAPI\DeviceAPI.csproj", "{79CB1445-6B27-4E9D-9647-4FD9DD8D6771}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{9B4C6724-EBFB-4AEF-BD0A-3706064D9C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B4C6724-EBFB-4AEF-BD0A-3706064D9C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B4C6724-EBFB-4AEF-BD0A-3706064D9C75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79CB1445-6B27-4E9D-9647-4FD9DD8D6771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79CB1445-6B27-4E9D-9647-4FD9DD8D6771}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79CB1445-6B27-4E9D-9647-4FD9DD8D6771}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79CB1445-6B27-4E9D-9647-4FD9DD8D6771}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

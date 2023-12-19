@@ -1,0 +1,31 @@
+﻿@page "/DeviceView/{DeviceId}"
+<h3>DeviceView</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Device Id</th>
+            <th scope="col">Location</th>
+            <th scope="col">Date</th>
+            <th scope="col">Type</th>
+            <th scope="col">Status</th>
+            <th scope="col">Last sent data instruction</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+            <tr>
+                <td scope="col">@Device.DeviceId</td>
+                <td scope="col">@Device.Location</td>
+                <td scope="col">@Device.Date</td>
+                <td scope="col">@Device.DeviceType</td>
+                <td scope="col">@Device.Status</td>
+                <th scope="col">Last sent data instruction</th>
+            </tr>
+    </tbody>
+</table>
+
+<a href="@($"DeviceLst")" class="btn btn-outline-primary">Back to List</a>
+
+

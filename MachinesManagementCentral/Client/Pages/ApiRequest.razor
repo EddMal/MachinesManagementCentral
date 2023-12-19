@@ -1,0 +1,51 @@
+﻿@page "/ApiRequest"
+@inject HttpClient Http
+<h3>Minimal API; ApiRequest</h3>
+
+<h5>Device from API: @deviceFromApi</h5>
+<button class="btn btn-primary" @onclick="GetDeviceFromAPI"> GET DEVICE FROM API</button>
+
+
+<h5>Device button from API: @deviceButtonFromApi</h5>
+<button class="btn btn-primary" @onclick="GetDeviceButtonFromAPI"> GET DEVICE BUTTON FROM API</button>
+
+<h5>Device type from API: @deviceTypeFromApi</h5>
+<button class="btn btn-primary" @onclick="GetDeviceTypeFromAPI"> GET DEVICE TYPE FROM API</button>
+
+
+@code {
+    private string deviceFromApi = string.Empty;
+    private string deviceButtonFromApi = string.Empty;
+    private string deviceTypeFromApi = string.Empty;
+
+    protected async Task GetDeviceFromAPI()
+    {
+        var response = await Http.GetAsync("/device");
+
+        if (response.IsSuccessStatusCode)
+        { 
+            deviceFromApi = await response.Content.ReadAsStringAsync();
+        }
+    }
+
+    protected async Task GetDeviceButtonFromAPI()
+    {
+        var response = await Http.GetAsync("/device/1/button/2");
+
+        if (response.IsSuccessStatusCode)
+        {
+            deviceButtonFromApi = await response.Content.ReadAsStringAsync();
+        }
+    }
+
+    protected async Task GetDeviceTypeFromAPI()
+    {
+        var response = await Http.GetAsync("/device/1");
+
+        if (response.IsSuccessStatusCode)
+        {
+            deviceTypeFromApi = await response.Content.ReadAsStringAsync();
+        }
+    }
+
+}

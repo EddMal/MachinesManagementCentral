@@ -1,16 +1,15 @@
 ﻿using MachinesManagementCentral.Client.Services;
-using MachinesManagementCentral.Shared;
 using MachinesManagementCentral.Shared.Domains;
 using Microsoft.AspNetCore.Components;
-namespace MachinesManagementCentral.Client.Components
-{
-    public partial class DeviceList
-    {
-       
 
+namespace MachinesManagementCentral.Client.Pages
+{
+    public partial class DeviceView
+    {
         [Parameter]
-        public string ExtraCaption { get; set; } = string.Empty;
-        //public Device Device { get; set; }
+        public string DeviceId { get; set; }
+        
+        public Device Device { get; set; } = new Device();
 
         [Inject]
         public IDeviceDataService? DeviceDataService { get; set; }
@@ -20,16 +19,15 @@ namespace MachinesManagementCentral.Client.Components
 
         protected override void OnInitialized()
         {
-            DeviceLst = DeviceDataService.GetDevices();
+
+            Device = DeviceDataService.GetDevice(int.Parse(DeviceId));     
 
             base.OnInitialized();
 
 
-           
+
 
         }
-
-
 
     }
 }

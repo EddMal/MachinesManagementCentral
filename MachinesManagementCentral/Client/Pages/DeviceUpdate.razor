@@ -1,8 +1,10 @@
 ﻿@page "/DeviceUpdate/{DeviceId}"
-
+@inject HttpClient Http
 <h3>Update Device</h3>
 
-<EditForm Model="@Device" OnValidSubmit="@HandleValidSubmit">
+<p> Response: @responseData</p>
+
+<EditForm Model="@Device" OnValidSubmit="@HandleValidSubmitAsync">
     <DataAnnotationsValidator/>
     
         <table class="table">

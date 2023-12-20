@@ -1,6 +1,14 @@
 ﻿@page "/DeviceView/{DeviceId}"
 @using MachinesManagementCentral.Client.Services
+@inject HttpClient Http
 <h3>DeviceView</h3>
+
+@if (Error)
+{
+    <div class="alert alert-danger" role="alert">
+        Error reading from API
+    </div>
+}
 
 <table class="table">
     <thead>
@@ -26,6 +34,10 @@
             </tr>
     </tbody>
     </table>
+
+    Return from API:
+<br />
+@responseData
 
 <a href="@($"DeviceLst")" class="btn btn-outline-primary">Back to List</a>
 <a href="@($"Instructions/{Device.DeviceId}")" class="btn btn-outline-primary">Data instructions</a>

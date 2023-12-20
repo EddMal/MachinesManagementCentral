@@ -4,7 +4,7 @@ namespace DeviceAPI.Collections
 {
     public class Devices
     {
-        public static List<Device> DeviceList { get; set; } = new List<Device>() {
+        public static List<Device> DeviceList = new List<Device>() {
 
                 new Device()
                 {

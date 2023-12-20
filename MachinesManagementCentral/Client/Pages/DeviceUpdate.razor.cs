@@ -1,6 +1,10 @@
 ﻿using MachinesManagementCentral.Client.Services;
 using MachinesManagementCentral.Shared.Domains;
 using Microsoft.AspNetCore.Components;
+using System.Text.Json;
+
+
+using System.Net.Http.Headers;
 
 namespace MachinesManagementCentral.Client.Pages
 {
@@ -18,19 +22,30 @@ namespace MachinesManagementCentral.Client.Pages
         [Parameter]
         public string DeviceId { get; set; } = string.Empty;
 
+        public string responseData = string.Empty;
+
 
         protected override void OnInitialized()
         {
-            Device = DeviceDataService.GetDevice(int.Parse(DeviceId));
-            DeviceHistory = Device;
             base.OnInitialized();
         }
 
-        protected async Task HandleValidSubmit()
+        protected async Task HandleValidSubmitAsync()
         {
-            //add error handling/control
-            DeviceDataService.UpdateDevice(Device);
-            NavigationManager.NavigateTo($"/DeviceLst");
+            var json = JsonSerializer.Serialize(Device);
+            var httpContent = new StringContent(json, new MediaTypeHeaderValue("application/json"));
+
+            var response = await Http.PostAsync("/device/add", httpContent);
+            if (response.IsSuccessStatusCode)
+            {
+
+                responseData = await response.Content.ReadAsStringAsync();
+                
+            }
+
+
+
+            //NavigationManager.NavigateTo($"/DeviceLst");
 
         }
 

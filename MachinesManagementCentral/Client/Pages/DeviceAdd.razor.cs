@@ -1,6 +1,7 @@
 ﻿using MachinesManagementCentral.Client.Services;
 using MachinesManagementCentral.Shared.Domains;
 using Microsoft.AspNetCore.Components;
+using System.Net;
 
 namespace MachinesManagementCentral.Client.Pages
 {
@@ -16,6 +17,7 @@ namespace MachinesManagementCentral.Client.Pages
 
         public Device Device { get; set; } = new Device();
 
+        //public HttpStatusCode HttpStatusCode { get; set; } = string.Empty;
 
         protected override void OnInitialized()
         {

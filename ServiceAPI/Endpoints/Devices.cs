@@ -6,7 +6,7 @@ namespace DeviceAPI.Endpoints
     {
         public static void RegisterUserEndpoint(this IEndpointRouteBuilder routes)
         {
-            var devices = routes.MapGroup("device");
+            var devices = routes.MapGroup("");
 
             devices.MapGet("/device", ()=> "Simple text from API");
 
@@ -17,7 +17,7 @@ namespace DeviceAPI.Endpoints
 
             devices.MapPost("/device/add", (MachinesManagementCentral.Shared.Domains.Device device) => Collections.Devices.DeviceList.Add(device));
 
-            devices.MapPut("/device/edith/{DeviceId}", (int DeviceId, Device device) =>
+            devices.MapPut("/device/edit/{DeviceId}", (int DeviceId, Device device) =>
             {
                 
                 if (device == null)

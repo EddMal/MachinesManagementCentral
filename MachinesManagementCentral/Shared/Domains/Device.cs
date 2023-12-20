@@ -32,8 +32,8 @@ namespace MachinesManagementCentral.Shared.Domains
 
         [EnumDataType(typeof(Status), ErrorMessage = "{0} Must be selected.")]
 
-        public List<DataInstruction>? DeviceDataInstructions { get; set; }
-      
+        public List<DataInstruction>? DeviceDataInstructions { get; set; } = new List<DataInstruction>();
+
 
         public Status Status { get; set; }
 

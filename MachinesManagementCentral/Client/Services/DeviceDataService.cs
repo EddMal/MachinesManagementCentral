@@ -1,6 +1,7 @@
 ﻿using MachinesManagementCentral.Client.Components;
 using MachinesManagementCentral.Client.Pages;
 using MachinesManagementCentral.Shared.Domains;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MachinesManagementCentral.Client.Services
 {
@@ -63,10 +64,11 @@ namespace MachinesManagementCentral.Client.Services
                 DeviceId = 1,
                 Date = DateTime.Now,
                 Executed = true,
+                //ExecutionTime = 0,
                 Instruction = "When(sawing > 100){Stop;}",
                 Device = Devices[0]
 
-            });
+            });;
         }
         public List<Device> GetDevices()
         {
@@ -129,9 +131,9 @@ namespace MachinesManagementCentral.Client.Services
                 if (instruction.Executed == false)
                 {
                     Random rnd = new Random();
-                    var exec = rnd.Next(1, 2);
+                    var exec = rnd.Next(1, 10);
                     //Simulates if instruction executed or not.
-                    if (exec == 2)
+                    if (exec > 3)
                     {
                         instruction.Executed = true;
                         instruction.ExecutionTime = DateTime.Now - instruction.Date;
@@ -141,6 +143,7 @@ namespace MachinesManagementCentral.Client.Services
                             if (deviceinstruction.Id == instruction.Id)
                             {
                                 deviceinstruction.Executed = instruction.Executed;
+                                deviceinstruction.ExecutionTime = instruction.ExecutionTime;
                             }
 
                             InstructionReplacementList.Add(deviceinstruction);
@@ -171,9 +174,9 @@ namespace MachinesManagementCentral.Client.Services
         public void SendDataInstruction(DataInstruction DataInstruction)
         {
             Random rnd = new Random();
-            var exec = rnd.Next(1, 2);
+            var exec = rnd.Next(1, 10);
             //Simulates if instruction executed or not.
-            if (exec == 1)
+            if (exec < 3)
                 DataInstruction.Executed = false;
             else
             { 
@@ -200,9 +203,9 @@ namespace MachinesManagementCentral.Client.Services
                     if (instruction.Executed == false)
                     {
                         Random rnd = new Random();
-                        var exec = rnd.Next(1, 2);
+                        var exec = rnd.Next(1, 10);
                         //Simulates if instruction executed or not.
-                        if (exec == 2)
+                        if (exec > 3)
                         {
                             instruction.Executed = true;
                             instruction.ExecutionTime = DateTime.Now - instruction.Date;
@@ -212,6 +215,7 @@ namespace MachinesManagementCentral.Client.Services
                                 if (deviceinstruction.Id == instruction.Id)
                                 {
                                     deviceinstruction.Executed = instruction.Executed;
+                                    deviceinstruction.ExecutionTime = instruction.ExecutionTime;
                                 }
 
                                 InstructionReplacementList.Add(deviceinstruction);
@@ -234,9 +238,9 @@ namespace MachinesManagementCentral.Client.Services
                     if (datanIstruction.Executed == false)
                     {
                         Random rnd = new Random();
-                        var exec = rnd.Next(1, 2);
+                        var exec = rnd.Next(1, 10);
                         //Simulates if instruction executed or not.
-                        if (exec == 2)
+                        if (exec > 3)
                         {
                             datanIstruction.Executed = true;
                             datanIstruction.ExecutionTime = DateTime.Now - datanIstruction.Date;
@@ -246,6 +250,7 @@ namespace MachinesManagementCentral.Client.Services
                                 if (deviceinstruction.Id == datanIstruction.Id)
                                 {
                                     deviceinstruction.Executed = datanIstruction.Executed;
+                                    deviceinstruction.ExecutionTime = datanIstruction.ExecutionTime;
                                 }
 
                                 InstructionReplacementList.Add(deviceinstruction);

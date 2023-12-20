@@ -9,9 +9,11 @@ namespace MachinesManagementCentral.Client.Pages
         [Parameter]
         public string? DeviceId { get; set; }
 
-        public DataInstruction Datanstruction { get; set; } = new DataInstruction();
+        public DataInstruction DataInstruction { get; set; } = new DataInstruction();
 
-        public List<DataInstruction> Datanstructions { get; set; } = new List<DataInstruction>();
+        public string DataInstructionMsg { get; set; } = string.Empty;
+
+        public List<DataInstruction> DatanInstructions { get; set; } = new List<DataInstruction>();
 
         [Inject]
         public IDeviceDataService? DeviceDataService { get; set; }
@@ -24,8 +26,9 @@ namespace MachinesManagementCentral.Client.Pages
 
         protected override void OnInitialized()
         {
-            //Insert control if valid (deviceId)
+
             Device = DeviceDataService.GetDevice(int.Parse(DeviceId));
+            latestInstructionTest = DeviceDataService.DeviceLatestDataInstructionStatus(int.Parse(DeviceId));
 
             base.OnInitialized();
 
@@ -37,15 +40,29 @@ namespace MachinesManagementCentral.Client.Pages
             //Error handling/control
             if (Device != null)
             {
+               
                 var latestInstruction = DeviceDataService.DeviceLatestDataInstructionStatus(Device.DeviceId);
-                if (latestInstruction.Executed != false)
+                if (latestInstruction.Executed == true)
                 {
-                    DeviceDataService.SendDataInstruction(Datanstruction);
-                    NavigationManager.NavigateTo($"/DeviceLst");
+                    var DataInstruction = new DataInstruction()
+                    {
+                        DeviceId = int.Parse(DeviceId),
+                        Instruction = DataInstructionMsg,
+                    };
+
+                    DeviceDataService.SendDataInstruction(DataInstruction);
                 }
 
-                
+                NavigationManager.NavigateTo($"/DeviceLst");
+
             }
+
+        }
+
+        protected async Task HandleInValidSubmit()
+        {
+            throw new Exception($"{DataInstruction}");
+           
 
         }
 

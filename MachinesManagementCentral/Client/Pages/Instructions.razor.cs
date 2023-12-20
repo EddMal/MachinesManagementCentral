@@ -21,7 +21,7 @@ namespace MachinesManagementCentral.Client.Pages
 
         protected override void OnInitialized()
         {
-            if (DeviceId == null)
+            if (DeviceDataService.GetDevice(int.Parse(DeviceId)) == null || DeviceId == "0")
             {
                 Datanstructions = DeviceDataService.GetDevicesDataInstructions();
             }
@@ -31,6 +31,19 @@ namespace MachinesManagementCentral.Client.Pages
             }
             
             base.OnInitialized();
+
+        }
+
+        protected async Task RefreshDeviceInstructions()
+        {
+
+            Datanstructions = DeviceDataService.GetDeviceDataInstructions(int.Parse(DeviceId));
+
+        }
+
+        protected async Task RefreshAllInstructions()
+        {
+            Datanstructions = DeviceDataService.GetDevicesDataInstructions();
 
         }
 

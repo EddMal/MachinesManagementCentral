@@ -10,7 +10,7 @@
             <th scope="col">Date Sent</th>
             <th scope="col">Executed</th>
             <th scope="col">Execution time</th>
-            <th scope="col">Update</th>
+            <th scope="col">Sent data</th>
         </tr>
     </thead>
 
@@ -18,15 +18,33 @@
     @foreach (var instructions in Datanstructions)
         {
             <tr>
-                <td scope="row">@instructions.Device.DeviceType</td>
                 <td scope="row">@instructions.DeviceId</td>
+                <td scope="row">@instructions.Device.DeviceType</td>
                 <td scope="row">@instructions.Id</td>
                 <td scope="row">@instructions.Date</td>
                 <td scope="row">@instructions.Executed</td>
                 <td scope="row">@instructions.ExecutionTime</td>
+                <td scope="row">@instructions.Instruction</td>
 @*                 <td scope="row"><a href="@($"DeviceUpdate/{device.DeviceId}")" class="btn btn-outline-primary">Update</a></td>
  *@            </tr>
         }
     </tbody>
-
 </table>
+
+@if (DeviceId == "0" || Device == null)
+{
+
+    
+    <button class="btn btn-primary" @onclick="RefreshAllInstructions"> Refresh</button>
+
+
+    
+
+}
+else
+{
+ 
+    <button class="btn btn-primary" @onclick="RefreshDeviceInstructions"> Refresh</button>
+    <a href="@($"SendInstruction/{DeviceId}")" class="btn btn-outline-primary">Send data instruction</a>
+    
+}

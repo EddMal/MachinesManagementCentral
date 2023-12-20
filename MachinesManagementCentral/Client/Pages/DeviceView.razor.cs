@@ -19,13 +19,11 @@ namespace MachinesManagementCentral.Client.Pages
 
         protected override void OnInitialized()
         {
+    
+            Device = DeviceDataService.GetDevice(int.Parse(DeviceId));
 
-            Device = DeviceDataService.GetDevice(int.Parse(DeviceId));     
-
+           
             base.OnInitialized();
-
-
-
 
         }
 

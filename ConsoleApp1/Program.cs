@@ -1,10 +1,81 @@
-﻿using MachinesManagementCentral.Client.Components;
-using MachinesManagementCentral.Client.Pages;
-using MachinesManagementCentral.Shared.Domains;
+﻿
 
-namespace MachinesManagementCentral.Client.Services
+using System.ComponentModel.DataAnnotations;
+
+namespace ConsoleApp1
 {
-    public class DeviceDataService : IDeviceDataService
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            
+       
+                DeviceDataService deviceDataService = new DeviceDataService();
+
+                var instruction = deviceDataService.DeviceLatestDataInstructionStatus(1);
+
+                Console.WriteLine(instruction);
+
+            
+        }
+    }
+    public class DataInstruction
+    {
+
+        public int Id { get; set; }
+        [StringLength(50, ErrorMessage = "Error length of data instruction, must be less than {1}")]
+        public string? Instruction { get; set; } = string.Empty;
+
+        public DateTime? Date { get; set; }
+
+        //Ticks/ms more suitable form
+        public TimeSpan? ExecutionTime { get { return DateTime.Now - Date; } }
+
+        public bool Executed { get; set; }
+
+
+        [Required(ErrorMessage = "{0} Is required")]
+        public int DeviceId { get; set; }
+
+
+        public Device Device { get; set; }
+    }
+
+    public enum Status
+    {
+        Offline,
+        Online
+    }
+
+    public enum Location
+    {
+        Sweden,
+        England
+    }
+
+    public class Device
+    {
+
+        public int DeviceId { get; set; }
+
+        //public Guid DeviceId { get; set; }
+        [EnumDataType(typeof(Status), ErrorMessage = "{0} Must be selected.")]
+        public Location Location { get; set; }
+        public DateTime Date { get; set; }
+        [StringLength(50, ErrorMessage = "Error length, must be between {2} and {1}", MinimumLength = 3)]
+        public string DeviceType { get; set; } = string.Empty;
+
+        [EnumDataType(typeof(Status), ErrorMessage = "{0} Must be selected.")]
+
+        public List<DataInstruction>? DeviceDataInstructions { get; set; }
+
+
+        public Status Status { get; set; }
+
+
+
+    }
+    public class DeviceDataService 
     {
         public List<Device> Devices { get; set; } = new List<Device>();
 
@@ -110,14 +181,12 @@ namespace MachinesManagementCentral.Client.Services
 
         public List<DataInstruction> GetDevicesDataInstructions()
         {
-            UpdateInstructions(DevicesDataInstructions);
             return DevicesDataInstructions;
         }
 
         public List<DataInstruction> GetDeviceDataInstructions(int deviceId)
         {
-            var dataInstructions = DevicesDataInstructions.Where(x => x.DeviceId == deviceId).ToList();
-            return UpdateInstructions(dataInstructions);
+            return DevicesDataInstructions.Where(x => x.DeviceId == deviceId).ToList();
         }
 
         public DataInstruction DeviceLatestDataInstructionStatus(int deviceId)
@@ -186,75 +255,7 @@ namespace MachinesManagementCentral.Client.Services
             var device = Devices.FirstOrDefault(x => x.DeviceId == DataInstruction.DeviceId);
             DataInstruction.Device = device;
             DevicesDataInstructions.Add(DataInstruction);
-            Devices[device.DeviceId].DeviceDataInstructions.Add(DataInstruction);
-        }
-
-        private void UpdateAllInstructions()
-        {
-            foreach (var instruction in DevicesDataInstructions)
-            {
-                if (instruction != null)
-                {
-                    //Simulates if instruction executed or not.
-                    if (instruction.Executed == false)
-                    {
-                        Random rnd = new Random();
-                        var exec = rnd.Next(1, 2);
-                        //Simulates if instruction executed or not.
-                        if (exec == 2)
-                        {
-                            instruction.Executed = true;
-                            var InstructionReplacementList = new List<DataInstruction>();
-                            foreach (var deviceinstruction in DevicesDataInstructions)
-                            {
-                                if (deviceinstruction.Id == instruction.Id)
-                                {
-                                    deviceinstruction.Executed = instruction.Executed;
-                                }
-
-                                InstructionReplacementList.Add(deviceinstruction);
-
-                            }
-                            DevicesDataInstructions = InstructionReplacementList;
-                        }
-                    }
-                }
-            }
-        }
-
-        private List<DataInstruction> UpdateInstructions(List<DataInstruction> instructions)
-        {
-            foreach (var instruction in instructions)
-            {
-                if (instruction != null)
-                {
-                    //Simulates if instruction executed or not.
-                    if (instruction.Executed == false)
-                    {
-                        Random rnd = new Random();
-                        var exec = rnd.Next(1, 2);
-                        //Simulates if instruction executed or not.
-                        if (exec == 2)
-                        {
-                            instruction.Executed = true;
-                            var InstructionReplacementList = new List<DataInstruction>();
-                            foreach (var deviceinstruction in DevicesDataInstructions)
-                            {
-                                if (deviceinstruction.Id == instruction.Id)
-                                {
-                                    deviceinstruction.Executed = instruction.Executed;
-                                }
-
-                                InstructionReplacementList.Add(deviceinstruction);
-
-                            }
-                            DevicesDataInstructions = InstructionReplacementList;
-                        }
-                    }
-                }
-
-            }
-            return instructions;
         }
     }
+
 }

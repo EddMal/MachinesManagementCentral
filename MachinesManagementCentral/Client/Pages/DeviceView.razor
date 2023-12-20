@@ -1,4 +1,5 @@
 ﻿@page "/DeviceView/{DeviceId}"
+@using MachinesManagementCentral.Client.Services
 <h3>DeviceView</h3>
 
 <table class="table">
@@ -14,18 +15,22 @@
     </thead>
 
     <tbody>
-
             <tr>
                 <td scope="col">@Device.DeviceId</td>
                 <td scope="col">@Device.Location</td>
                 <td scope="col">@Device.Date</td>
                 <td scope="col">@Device.DeviceType</td>
                 <td scope="col">@Device.Status</td>
-                <th scope="col">Last sent data instruction</th>
+
+                @* <th scope="col">@LastInstruction</th> *@
             </tr>
     </tbody>
-</table>
+    </table>
 
 <a href="@($"DeviceLst")" class="btn btn-outline-primary">Back to List</a>
+<a href="@($"Instructions/{Device.DeviceId}")" class="btn btn-outline-primary">Data instructions</a>
+
+
+
 
 

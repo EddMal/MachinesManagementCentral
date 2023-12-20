@@ -3,7 +3,7 @@
 
 <section class="device-edit">
 
-    <EditForm Model="@Datanstruction" OnValidSubmit="@HandleValidSubmit">
+    <EditForm Model="@DataInstructionMsg" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInValidSubmit">
         <DataAnnotationsValidator />
 
         <table class="table">
@@ -19,15 +19,30 @@
             <tbody>
                 <tr>
                     <td scope="row">
-                        <InputText id="Instruction" @bind-Value="Datanstruction.Instruction" class="form-control col-md-8">
+                        <InputText id="DataInstructionMsg" @bind-Value="DataInstructionMsg" class="form-control col-md-8">
                         </InputText>
-                        <ValidationMessage For="@(()=> Datanstruction.Instruction)" />
+                        @* <ValidationMessage For="@(()=> DataInstruction.Instruction)" /> *@
                     </td>
                 </tr>
             </tbody>
         </table>
 
+        <table>
+            <tbody>
+                <tr>
+                    <td scope="row">@latestInstructionTest.Device.DeviceType</td>
+                    <td scope="row">@latestInstructionTest.DeviceId</td>
+                    <td scope="row">@latestInstructionTest.Id</td>
+                    <td scope="row">@latestInstructionTest.Date</td>
+                    <td scope="row">Executed : @latestInstructionTest.Executed</td>
+                    <td scope="row">@latestInstructionTest.ExecutionTime</td>
+                    <td scope="row">new DataMsg: @DataInstructionMsg</td>
+                </tr>    
+            </tbody>
+        </table>
+        
+
         <a href="@($"listofdevices")" class="btn btn-outline-primary">Back to Device list</a>&nbsp;
-        <button type="submit" class="btn btn-primary me-1">Add Device</button>
+        <button type="submit" class="btn btn-primary me-1">Send Data</button>
     </EditForm>
 </section>

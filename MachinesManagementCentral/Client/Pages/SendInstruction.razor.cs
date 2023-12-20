@@ -11,6 +11,8 @@ namespace MachinesManagementCentral.Client.Pages
 
         public DataInstruction DataInstruction { get; set; } = new DataInstruction();
 
+        public DataInstruction latestInstructionTest { get; set; } = new DataInstruction();
+
         public string DataInstructionMsg { get; set; } = string.Empty;
 
         public List<DataInstruction> DatanInstructions { get; set; } = new List<DataInstruction>();
@@ -40,12 +42,13 @@ namespace MachinesManagementCentral.Client.Pages
             //Error handling/control
             if (Device != null)
             {
-               
-                var latestInstruction = DeviceDataService.DeviceLatestDataInstructionStatus(Device.DeviceId);
-                if (latestInstruction.Executed == true)
+
+                latestInstructionTest = DeviceDataService.DeviceLatestDataInstructionStatus(Device.DeviceId);
+                if (latestInstructionTest.Executed == true)
                 {
                     var DataInstruction = new DataInstruction()
                     {
+                        Date = DateTime.Now,
                         DeviceId = int.Parse(DeviceId),
                         Instruction = DataInstructionMsg,
                     };

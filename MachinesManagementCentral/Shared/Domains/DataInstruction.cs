@@ -17,7 +17,8 @@ namespace MachinesManagementCentral.Shared.Domains
         public DateTime? Date { get; set; }
 
         //Ticks/ms more suitable form
-        public TimeSpan? ExecutionTime { get {return DateTime.Now - Date;} } 
+        public TimeSpan? ExecutionTime { get; set; }
+  
 
         public bool Executed { get; set; }
 

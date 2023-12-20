@@ -134,6 +134,7 @@ namespace MachinesManagementCentral.Client.Services
                     if (exec == 2)
                     {
                         instruction.Executed = true;
+                        instruction.ExecutionTime = DateTime.Now - instruction.Date;
                         var InstructionReplacementList = new List<DataInstruction>();
                         foreach (var deviceinstruction in DevicesDataInstructions)
                         {
@@ -175,13 +176,13 @@ namespace MachinesManagementCentral.Client.Services
             if (exec == 1)
                 DataInstruction.Executed = false;
             else
+            { 
                 DataInstruction.Executed = true;
+                DataInstruction.ExecutionTime = DateTime.Now - DataInstruction.Date;
+            }
 
             Random rndm = new Random();
             DataInstruction.Id = rndm.Next(100000);
-
-
-
 
             var device = Devices.FirstOrDefault(x => x.DeviceId == DataInstruction.DeviceId);
             DataInstruction.Device = device;
@@ -204,6 +205,7 @@ namespace MachinesManagementCentral.Client.Services
                         if (exec == 2)
                         {
                             instruction.Executed = true;
+                            instruction.ExecutionTime = DateTime.Now - instruction.Date;
                             var InstructionReplacementList = new List<DataInstruction>();
                             foreach (var deviceinstruction in DevicesDataInstructions)
                             {
@@ -222,27 +224,28 @@ namespace MachinesManagementCentral.Client.Services
             }
         }
 
-        private List<DataInstruction> UpdateInstructions(List<DataInstruction> instructions)
+        private List<DataInstruction> UpdateInstructions(List<DataInstruction> DataInstructions)
         {
-            foreach (var instruction in instructions)
+            foreach (var datanIstruction in DataInstructions)
             {
-                if (instruction != null)
+                if (datanIstruction != null)
                 {
                     //Simulates if instruction executed or not.
-                    if (instruction.Executed == false)
+                    if (datanIstruction.Executed == false)
                     {
                         Random rnd = new Random();
                         var exec = rnd.Next(1, 2);
                         //Simulates if instruction executed or not.
                         if (exec == 2)
                         {
-                            instruction.Executed = true;
+                            datanIstruction.Executed = true;
+                            datanIstruction.ExecutionTime = DateTime.Now - datanIstruction.Date;
                             var InstructionReplacementList = new List<DataInstruction>();
                             foreach (var deviceinstruction in DevicesDataInstructions)
                             {
-                                if (deviceinstruction.Id == instruction.Id)
+                                if (deviceinstruction.Id == datanIstruction.Id)
                                 {
-                                    deviceinstruction.Executed = instruction.Executed;
+                                    deviceinstruction.Executed = datanIstruction.Executed;
                                 }
 
                                 InstructionReplacementList.Add(deviceinstruction);
@@ -254,7 +257,7 @@ namespace MachinesManagementCentral.Client.Services
                 }
 
             }
-            return instructions;
+            return DataInstructions;
         }
     }
 }

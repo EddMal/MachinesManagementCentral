@@ -2,9 +2,9 @@
 
 namespace DeviceAPI.Endpoints
 {
-    public class Devices
+    public static class Devices
     {
-        public static void RegisterUserEndpoint(IEndpointRouteBuilder routes)
+        public static void RegisterUserEndpoint(this IEndpointRouteBuilder routes)
         {
             var devices = routes.MapGroup("device");
 
@@ -19,6 +19,9 @@ namespace DeviceAPI.Endpoints
 
             devices.MapPut("/device/edith/{DeviceId}", (int DeviceId, Device device) =>
             {
+                
+                if (device == null)
+                { return Results.Problem("Null for device or device id != Ok."); }
                 Device currentDevice = Collections.Devices.DeviceList.FirstOrDefault(device => device.DeviceId == DeviceId);
                 if (currentDevice != null)
                 {
@@ -30,7 +33,7 @@ namespace DeviceAPI.Endpoints
                 }
                 else
                 {
-                    return Results.Ok("Device not found");
+                    return Results.NotFound("Device not found");
                 }
             });
 
@@ -44,7 +47,7 @@ namespace DeviceAPI.Endpoints
                 }
                 else
                 {
-                    return Results.Ok("Device not found");
+                    return Results.NotFound("Device not found");
                 }
             });
         }

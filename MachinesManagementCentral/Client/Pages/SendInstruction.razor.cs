@@ -11,6 +11,8 @@ namespace MachinesManagementCentral.Client.Pages
 
         public DataInstruction DataInstruction { get; set; } = new DataInstruction();
 
+        public DataInstruction latestInstructionTest { get; set; } = new DataInstruction();
+
         public string DataInstructionMsg { get; set; } = string.Empty;
 
         public List<DataInstruction> DatanInstructions { get; set; } = new List<DataInstruction>();

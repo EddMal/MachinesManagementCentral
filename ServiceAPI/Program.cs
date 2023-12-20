@@ -58,6 +58,8 @@ namespace ServiceAPI
             .WithName("GetWeatherForecast")
             .WithOpenApi();
 
+            app.RegisterUserEndpoint;
+
             app.MapGet("/device", () => "Getting a device from API");
 
             app.MapGet("/device/{deviceId}/button/{buttonID}",

@@ -68,7 +68,7 @@ namespace MachinesManagementCentral.Client.Services
                 Instruction = "When(sawing > 100){Stop;}",
                 Device = Devices[0]
 
-            });;
+            });
         }
         public List<Device> GetDevices()
         {
